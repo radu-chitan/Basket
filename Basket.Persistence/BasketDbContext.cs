@@ -8,7 +8,7 @@ namespace Persistence
         public BasketDbContext(DbContextOptions<BasketDbContext> options)
             : base(options) {}
 
-        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Domain.Entities.Basket> Baskets { get; set; }
 
         public DbSet<Item> Items { get; set; }
 
