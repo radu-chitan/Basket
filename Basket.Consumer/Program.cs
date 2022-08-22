@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+//TODO: make them run asynchronously so they do not block
 builder.Services.AddHostedService<AddItemToBasketConsumerService>();
 builder.Services.AddHostedService<BasketCreationConsumerService>();
 builder.Services.AddHostedService<CheckoutBasketConsumerService>();

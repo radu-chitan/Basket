@@ -1,5 +1,4 @@
 ﻿using Basket.Application.Commands;
-using Basket.Application.Interfaces;
 using Confluent.Kafka;
 using MediatR;
 using System.Text.Json;
