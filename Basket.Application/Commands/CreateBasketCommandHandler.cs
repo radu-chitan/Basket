@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Basket.Application.Commands
 {
-    internal class CreateBasketCommandHandler : IRequestHandler<CreateBasketCommand, Unit>
+    public class CreateBasketCommandHandler : IRequestHandler<CreateBasketCommand, Unit>
     {
         private readonly IBasketDbContext dbContext;
 
