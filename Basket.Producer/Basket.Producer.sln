@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Consumer", "..\Baske
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Domain", "..\Basket.Domain\Basket.Domain.csproj", "{B34B6B7B-008D-47EC-83DD-5D0E35F683A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Persistence", "..\Basket.Persistence\Basket.Persistence.csproj", "{9E696405-0744-49BC-98C0-FBDF34158D77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B34B6B7B-008D-47EC-83DD-5D0E35F683A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B34B6B7B-008D-47EC-83DD-5D0E35F683A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B34B6B7B-008D-47EC-83DD-5D0E35F683A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E696405-0744-49BC-98C0-FBDF34158D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E696405-0744-49BC-98C0-FBDF34158D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E696405-0744-49BC-98C0-FBDF34158D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E696405-0744-49BC-98C0-FBDF34158D77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
