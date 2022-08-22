@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddHostedService<AddItemToBasketConsumerService>();
 builder.Services.AddHostedService<BasketCreationConsumerService>();
+builder.Services.AddHostedService<CheckoutBasketConsumerService>();
 
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();

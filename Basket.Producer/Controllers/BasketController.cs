@@ -47,7 +47,7 @@ namespace Basket.Producer.Controllers
         public async Task<IActionResult> CheckoutBasket(int id)
         {
             string message = JsonSerializer.Serialize(new CheckoutBasketCommand { BasketId = id });
-            return Ok(await producerService.SendOrderRequest(Domain.Common.Constants.BASKET_ADD_ITEM_TOPIC, message, server));
+            return Ok(await producerService.SendOrderRequest(Domain.Common.Constants.BASKET_CHECKOUT, message, server));
         }
     }
 }

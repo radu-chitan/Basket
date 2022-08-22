@@ -1,6 +1,8 @@
-﻿namespace Basket.Application.Commands
+﻿using MediatR;
+
+namespace Basket.Application.Commands
 {
-    public class AddItemToBasketCommand
+    public class AddItemToBasketCommand: IRequest
     {
         public string? Item { get; set; }
         public int Price { get; set; }

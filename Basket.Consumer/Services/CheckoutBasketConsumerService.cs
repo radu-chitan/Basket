@@ -1,6 +1,7 @@
 ﻿using Basket.Application.Commands;
 using Basket.Application.Interfaces;
 using Confluent.Kafka;
+using MediatR;
 using System.Text.Json;
 
 namespace Basket.Consumer.Services
@@ -8,12 +9,12 @@ namespace Basket.Consumer.Services
     public class CheckoutBasketConsumerService : IHostedService
     {
         private readonly IConfiguration configuration;
-        private readonly IServiceScopeFactory scopeFactory;
+        private readonly IMediator mediator;
 
-        public CheckoutBasketConsumerService(IConfiguration configuration, IServiceScopeFactory scopeFactory)
+        public CheckoutBasketConsumerService(IConfiguration configuration, IMediator mediator)
         {
             this.configuration = configuration;
-            this.scopeFactory = scopeFactory;
+            this.mediator = mediator;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -36,15 +37,7 @@ namespace Basket.Consumer.Services
                     var checkoutBasketCommand = JsonSerializer.Deserialize<CheckoutBasketCommand>(consumer.Message.Value);
                     if (checkoutBasketCommand != null)
                     {
-                        using var scope = scopeFactory.CreateScope();
-                        var dbContext = scope.ServiceProvider.GetRequiredService<IBasketDbContext>();
-                        var basket = dbContext.Baskets.Find(checkoutBasketCommand.BasketId);
-                        if (basket != null)
-                        {
-                            dbContext.Items.RemoveRange(dbContext.Items.Where(t => t.BasketId == checkoutBasketCommand.BasketId));
-                            dbContext.Baskets.Remove(basket);
-                            await dbContext.SaveChangesAsync(cancellationToken);
-                        }
+                        await mediator.Send(checkoutBasketCommand, cancellationToken);
                     }
                 }
             }
