@@ -12,6 +12,10 @@ namespace Persistence.Configurations
             builder.Property(e => e.Customer)
                 .HasMaxLength(50)
                 .IsRequired();
+
+            builder.HasMany(e => e.Items)
+                .WithOne(e => e.Basket)
+                .HasForeignKey(e => e.BasketId);
         }
     }
 }

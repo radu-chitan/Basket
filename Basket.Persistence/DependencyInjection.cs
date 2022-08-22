@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Basket.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,8 @@ namespace Persistence
         {
             services.AddDbContext<BasketDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("BasketDatabase")));
+
+            services.AddScoped<IBasketDbContext>(provider => provider.GetService<BasketDbContext>());
             return services;
         }
     }
