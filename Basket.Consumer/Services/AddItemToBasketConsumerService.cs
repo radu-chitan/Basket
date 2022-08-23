@@ -8,15 +8,21 @@ namespace Basket.Consumer.Services
     public class AddItemToBasketConsumerService : IHostedService
     {
         private readonly IConfiguration configuration;
-        private readonly IMediator mediator;
+        private readonly IServiceScopeFactory scopeFactory;
 
-        public AddItemToBasketConsumerService(IConfiguration configuration, IMediator mediator)
+        public AddItemToBasketConsumerService(IConfiguration configuration, IServiceScopeFactory scopeFactory)
         {
             this.configuration = configuration;
-            this.mediator = mediator;
+            this.scopeFactory = scopeFactory;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
+        {
+            new Thread(async () => await Work(cancellationToken)).Start();
+            await Task.CompletedTask;
+        }
+
+        private async Task Work(CancellationToken cancellationToken)
         {
             var config = new ConsumerConfig
             {
@@ -36,6 +42,8 @@ namespace Basket.Consumer.Services
                     var addItemCommand = JsonSerializer.Deserialize<AddItemToBasketCommand>(consumer.Message.Value);
                     if (addItemCommand != null)
                     {
+                        using var scope = scopeFactory.CreateScope();
+                        var mediator = scope.ServiceProvider.GetService<IMediator>();
                         await mediator.Send(addItemCommand, cancellationToken);
                     }
                 }
