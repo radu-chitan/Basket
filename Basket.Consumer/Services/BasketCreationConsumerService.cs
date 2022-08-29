@@ -17,10 +17,9 @@ namespace Basket.Consumer.Services
             this.scopeFactory = scopeFactory;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            new Thread(async () => await Work(cancellationToken)).Start();
-            await Task.CompletedTask;
+            return Task.Run(async () => await Work(cancellationToken), cancellationToken);
         }
 
         private async Task Work(CancellationToken cancellationToken)
